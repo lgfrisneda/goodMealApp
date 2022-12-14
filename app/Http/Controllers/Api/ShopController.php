@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShopStoreRequest;
+use App\Http\Requests\ShopUpdateRequest;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 
@@ -27,9 +29,10 @@ class ShopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ShopStoreRequest $request)
     {
-        $newShop = Shop::create($request->all());
+        $dataValidated = $request->validated();
+        $newShop = Shop::create($dataValidated);
 
         return response()->json($newShop);
     }
@@ -49,12 +52,13 @@ class ShopController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shop $shop)
+    public function update(ShopUpdateRequest $request, Shop $shop)
     {
-        $shop->update($request->all());
+        $dataValidated = $request->validated();
+        $shop->update($dataValidated);
 
         return response()->json($shop->fresh());
     }
@@ -62,7 +66,7 @@ class ShopController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
     public function destroy(Shop $shop)
