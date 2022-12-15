@@ -33,3 +33,8 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+Route::group(['prefix'=>'shops', 'as'=>'shops.'], function(){
+    Route::get('/', 'ShopController@index')->name('index');
+    Route::get('/{shop}', 'ShopController@show')->name('show');
+});
