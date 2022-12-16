@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Product;
 use App\Models\Shop;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -22,6 +23,9 @@ class ShopTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
+        $user = User::factory()->withPersonalTeam()->create();
+        $this->actingAs($user);
+
         Shop::factory(3)->create();
         
         $this->get(route('shops.index'))
@@ -39,6 +43,9 @@ class ShopTest extends TestCase
     public function test_shop_can_be_show_view()
     {
         $this->withoutExceptionHandling();
+
+        $user = User::factory()->withPersonalTeam()->create();
+        $this->actingAs($user);
 
         Shop::factory(1)->create();
 
