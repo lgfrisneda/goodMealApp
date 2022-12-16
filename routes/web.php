@@ -34,7 +34,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::group(['prefix'=>'shops', 'as'=>'shops.'], function(){
-    Route::get('/', 'ShopController@index')->name('index');
-    Route::get('/{shop}', 'ShopController@show')->name('show');
+Route::controller('ShopController')->prefix('shops')->as('shops.')->group(function(){
+    Route::get('/', 'index')->name('index');
+    Route::get('/{shop}', 'show')->name('show');
 });
