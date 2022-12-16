@@ -38,3 +38,16 @@ Route::controller('ShopController')->prefix('shops')->as('shops.')->group(functi
     Route::get('/', 'index')->name('index');
     Route::get('/{shop}', 'show')->name('show');
 });
+
+Route::controller('ShoppingCartController')->prefix('shopping-cart')->as('shoppingCart.')->group(function(){
+    Route::get('/show', 'show')->name('show');
+    Route::get('/add-to-cart/{product}', 'add')->name('add');
+    Route::patch('/update-cart', 'update')->name('update');
+    Route::delete('/remove-from-cart', 'remove')->name('remove');
+});
+
+Route::controller('OrderController')->prefix('orders')->as('orders.')->group(function(){
+    Route::get('/', 'myOrders')->name('myOrders');
+    Route::get('/generate', 'generate')->name('generate');
+    Route::get('/{order}', 'show')->name('show');
+});

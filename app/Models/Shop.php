@@ -15,4 +15,14 @@ class Shop extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function delivery()
+    {
+        return $this->hasOne(Delivery::class);
+    }
 }
