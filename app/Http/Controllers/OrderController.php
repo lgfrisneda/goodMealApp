@@ -32,7 +32,7 @@ class OrderController extends Controller
 
     public function myOrders()
     {
-        $myOrders = auth()->user()->orders->load('shop', 'details');
+        $myOrders = auth()->user()->orders->load('shop.delivery', 'details');
         return $this->view('User.Orders.Index', compact('myOrders'));
     }
 

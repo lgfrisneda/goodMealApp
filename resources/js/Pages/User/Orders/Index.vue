@@ -26,7 +26,7 @@
                             <div class="col">
                                 <span class="d-block">Tienda: {{ order.shop.name }}</span>
                                 <span class="d-block">N° de orden: {{ order.id }}</span>
-                                <span class="d-block">Monto total: {{ calculateTotal(order.details) }}</span>
+                                <span class="d-block">Monto total: {{ Math.floor(calculateTotal(order)*100)/100 }}</span>
                                 <span class="d-block">Horario: 09:00 a 16:00</span>
                             </div>
                             <div class="col text-end mt-4">
@@ -63,15 +63,17 @@ export default defineComponent({
     },
     props: ['myOrders'],
     methods: {
-        calculateTotal(products) {
-            var total = 0;
-            products.map((item) => {
+        calculateTotal(order) {
+            var total_products = 0;
+            order.details.map((item) => {
                 if (item.amount){
-                    total += item.amount;
+                    total_products += item.amount;
                 }
             });
 
-            return total;
+            var delivery = (order.shop.delivery)? (order.shop.delivery.percent/100) * total_products: 0;
+
+            return total_products + delivery;
         },
     }
 
