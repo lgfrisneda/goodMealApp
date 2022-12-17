@@ -16,7 +16,7 @@ class ShopFactory extends Factory
         return [
             'name' => $this->faker->company,
             'description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
-            'image' => $this->faker->imageUrl($width = 640, $height = 480),
+            'image' => 'https://picsum.photos/400',
             'options' => $this->faker->randomElement(['pick-up', 'delivery', 'both']),
             'address' => $this->faker->address,
             'lon' => $this->faker->longitude($min = -180, $max = 180),

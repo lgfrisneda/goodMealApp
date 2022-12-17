@@ -10,8 +10,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $shops = Shop::all();
-
+        $shops = Shop::all()->load('products');
         return $this->view('Shops.Index', compact('shops'));
     }
 
