@@ -19,7 +19,7 @@ class ProductFactory extends Factory
             'shop_id' => $this->faker->randomElement($shops),
             'name' => $this->faker->word,
             'description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
-            'image' => $this->faker->imageUrl($width = 640, $height = 480),
+            'image' => 'https://picsum.photos/400',
             'stock' => rand(0, 50),
             'price' => $this->faker->randomFloat(2, 0, 100),
             'discount_percent' => $this->faker->randomNumber(2)
