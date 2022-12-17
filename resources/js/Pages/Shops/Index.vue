@@ -1,23 +1,42 @@
 <template>
     <div class="container">
-        <ul class="nav d-flex justify-content-between py-2 border-bottom border-2">
-            <jet-nav-link :href="route('shops.index')" :active="route().current('shops.index')">
-                <span class="text-dark">
-                    Con Stock
-                </span>
-            </jet-nav-link>
-            <jet-nav-link :href="route('shops.index')" :active="route().current('shops.index')">
-                <span class="text-dark">
-                    Sin Stock
-                </span>
-            </jet-nav-link>
-            <jet-nav-link :href="route('shops.index')" :active="route().current('shops.index')">
-                <span class="text-dark">
-                    Favoritos
-                </span>
-            </jet-nav-link>
-        </ul>
-        <div class="my-3 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <div class="sticky-top bg-white">
+            <div class="d-flex bd-highlight">
+                <div class="me-auto p-2 bd-highlight">
+                    <h3 class="fw-bolder">
+                        <i class="fa-sharp fa-solid fa-location-dot fa-lg"></i> Ubicacion
+                    </h3>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <button type="button" class="btn btn-sm btn-light">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <button type="button" class="btn btn-sm btn-light">
+                        <i class="fa-solid fa-sliders"></i>
+                    </button>
+                </div>
+            </div>
+            <ul class="nav d-flex justify-content-between py-2 border-bottom border-2">
+                <jet-nav-link :href="route('shops.index')" :active="route().current('shops.index')">
+                    <span class="text-dark">
+                        Con Stock
+                    </span>
+                </jet-nav-link>
+                <jet-nav-link :href="route('shops.index')" :active="route().current('shops.index')">
+                    <span class="text-dark">
+                        Sin Stock
+                    </span>
+                </jet-nav-link>
+                <jet-nav-link :href="route('shops.index')" :active="route().current('shops.index')">
+                    <span class="text-dark">
+                        Favoritos
+                    </span>
+                </jet-nav-link>
+            </ul>
+        </div>
+        <div class="my-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             <div class="col" v-for="shop in shops" :key="shop.id">
                 <div class="card text-dark shadow bg-body rounded">
                     <div class="d-flex justify-content-end">
@@ -27,11 +46,11 @@
                     </div>
                     <img src="https://picsum.photos/600/300" class="card-img-top" style="height: 90px;" alt="#">
                     <div class="card-img-overlay" style="height: 90px;">
-                        <h5><span class="badge rounded-pill bg-primary">Horario</span></h5>
+                        <h5><span class="badge rounded-pill bg-primary">Hoy 09:00 - 19:00 hrs</span></h5>
                         <h5><span class="badge rounded-pill bg-primary">{{ (shop.options == 'both')? 'pick-up o delivery': shop.options}}</span></h5>
                     </div>
                     <div class="d-flex align-items-center">
-                        <div class="position-absolute d-flex justify-content-end me-5">
+                        <div class="position-absolute d-flex justify-content-end me-4">
                             <img class="rounded-circle border border-white border-1 w-25" :src="shop.image" :alt="shop.name">
                         </div>
                     </div>

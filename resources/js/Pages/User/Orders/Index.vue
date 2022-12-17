@@ -1,16 +1,25 @@
 <template>
     <div class="container">
         <div class="text-center py-2 border-bottom border-2 bg-white sticky-top">
-            <h3 class="fw-bolder">
-                Mis Ordenes
-            </h3>
+            <div class="d-flex bd-highlight">
+                <div class="me-auto p-2 bd-highlight w-100">
+                    <h3 class="fw-bolder">
+                        Mis Ordenes
+                    </h3>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <button type="button" class="btn btn-sm btn-light">
+                        <i class="fa-solid fa-headset fa-2x"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="my-3 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <div class="my-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             <div class="col" v-for="order in myOrders" :key="order.id">
                 <div class="card text-dark shadow bg-body rounded">
-                    <div class="card-header d-flex justify-content-between bg-white border-0 pb-0">
-                        <h5 class="card-title fw-bolder mb-0 d-inline">{{ moment(order.created_at).format("DD/MM/YY") }}</h5>
-                        <span class="badge bg-info text-white">Rescatada</span>
+                    <div class="pt-0 card-header d-flex justify-content-between bg-white border-0 pb-0">
+                        <h5 class="pt-2 card-title fw-bolder mb-0 d-inline">{{ moment(order.created_at).format("DD/MM/YY") }}</h5>
+                        <span class="badge bg-info text-white pt-2">Rescatada</span>
                     </div>
                     <div class="card-body pt-0">
                         <div class="row row-cols-2">
