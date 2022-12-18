@@ -26,7 +26,7 @@
                             <div class="col">
                                 <span class="d-block">Tienda: {{ order.shop.name }}</span>
                                 <span class="d-block">N° de orden: {{ order.id }}</span>
-                                <span class="d-block">Monto total: {{ Math.floor(calculateTotal(order)*100)/100 }}</span>
+                                <span class="d-block">Monto total: {{ twoDecimals(calculateTotal(order)) }}</span>
                                 <span class="d-block">Horario: 09:00 a 16:00</span>
                             </div>
                             <div class="col text-end mt-4">

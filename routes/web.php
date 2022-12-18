@@ -41,13 +41,13 @@ Route::controller('ShopController')->prefix('shops')->as('shops.')->group(functi
 
 Route::controller('ShoppingCartController')->prefix('shopping-cart')->as('shoppingCart.')->group(function(){
     Route::get('/show', 'show')->name('show');
-    Route::get('/add-to-cart/{product}', 'add')->name('add');
+    Route::post('/add-to-cart/{product}', 'add')->name('add');
     Route::patch('/update-cart', 'update')->name('update');
     Route::delete('/remove-from-cart', 'remove')->name('remove');
 });
 
 Route::controller('OrderController')->prefix('orders')->as('orders.')->group(function(){
     Route::get('/', 'myOrders')->name('myOrders');
-    Route::get('/generate', 'generate')->name('generate');
+    Route::post('/generate', 'generate')->name('generate');
     Route::get('/{order}', 'show')->name('show');
 });

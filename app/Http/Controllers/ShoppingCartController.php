@@ -10,13 +10,18 @@ class ShoppingCartController extends Controller
     public function show()
     {
         $myCart = session('cart') ?? [];
-        return $this->view('User.ShoppingCart.Show', compact('myCart'));
+        if(!$myCart){
+            return redirect()->route('shops.index')->with('warning', 'Tu carrito de compras esta vacio');
+        }
+        $productId = array_key_first($myCart);
+        $shop = Product::find($productId)->shop->load('delivery');
+        return $this->view('User.ShoppingCart.Show', compact('myCart', 'shop'));
     }
 
-    public function add(Product $product)
+    public function add(Request $request, Product $product)
     {
-        if(!$product){
-            return redirect()->back()->with('warning', 'Este producto no existe');
+        if(!$product && !$request->amount_discount){
+            return back()->with('warning', 'Este producto no existe');
         }
 
         $cart = session()->get('cart');
@@ -25,18 +30,18 @@ class ShoppingCartController extends Controller
                     $product->id => [
                         'product_name' => $product->name,
                         'quantity' => 1,
-                        'amount' => $product->price,
+                        'amount' => $request->amount_discount,
                     ]
             ];
         }else{
             if(isset($cart[$product->id])){
                 $cart[$product->id]['quantity']++;
-                $cart[$product->id]['amount'] = $product->price * $cart[$product->id]['quantity'];
+                $cart[$product->id]['amount'] = $request->amount_discount * $cart[$product->id]['quantity'];
             }else{
                 $cart[$product->id] = [
                     'product_name' => $product->name,
                     'quantity' => 1,
-                    'amount' => $product->price,
+                    'amount' => $request->amount_discount,
                 ];
             }
         
@@ -44,7 +49,7 @@ class ShoppingCartController extends Controller
         
         session()->put('cart', $cart);
 
-        return redirect()->back()->with('success', 'Producto agregado al carrito');
+        return back()->with('success', 'Producto agregado al carrito');
     }
 
     public function update(Request $request)

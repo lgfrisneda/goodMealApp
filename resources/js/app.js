@@ -11,9 +11,15 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => require(`./Pages/${name}.vue`),
     setup({ el, app, props, plugin }) {
+        console.log(props.initialPage.props.messages);
         return createApp({ render: () => h(app, props) })
             .use(plugin)
-            .mixin({ methods: { route } })
+            .mixin({ methods: { 
+                route,
+                twoDecimals(value){
+                    return Math.floor(value*100)/100;
+                },
+            } })
             .mount(el);
     },
 });

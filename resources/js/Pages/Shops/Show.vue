@@ -60,17 +60,17 @@
                         <div class="card-img-overlay h-25">
                             <div class="d-flex justify-content-end">
                                 <div class="position-absolute d-flex justify-content-end">
-                                    <Link href="#" class="bg-white border border-2 border-danger btn btn-sm btn-link rounded-circle text-decoration-none">
+                                    <button type="button" @click="addToCart(product)" class="bg-white border border-2 border-danger btn btn-sm btn-link rounded-circle text-decoration-none">
                                         <i class="fa-solid fa-plus fa-2x text-danger"></i>
-                                    </Link>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="card-title text-center fw-bolder">
-                            <h5 class="fw-bolder d-inline me-2">{{`$${Math.floor(this.discount(product)*100)/100}` }}</h5>
-                            <h5 class="text-secondary d-inline text-decoration-line-through">{{`$${Math.floor(product.price*100)/100}` }}</h5>
+                            <h5 class="fw-bolder d-inline me-2">{{`$${this.twoDecimals(this.discount(product))}` }}</h5>
+                            <h5 class="text-secondary d-inline text-decoration-line-through">{{`$${this.twoDecimals(product.price)}` }}</h5>
                         </div>
                         <p class="text-center">
                             <span class="badge bg-secondary">{{`${product.discount_percent}% dcto`}}</span>
@@ -106,6 +106,12 @@ export default defineComponent({
         discount(product){
             var amount_discount = (product.discount_percent/100) * product.price;
             return product.price - amount_discount;
+        },
+        addToCart(product){
+            var amount_discount = this.twoDecimals(this.discount(product));
+            this.$inertia.post(route('shoppingCart.add', product), {
+                amount_discount: amount_discount
+            });
         }
     }
 

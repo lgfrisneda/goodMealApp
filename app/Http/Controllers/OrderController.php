@@ -17,7 +17,8 @@ class OrderController extends Controller
 
         $orderCreated = Order::create([
             'user_id' => auth()->user()->id,
-            'shop_id' => $product->shop_id
+            'shop_id' => $product->shop_id,
+            'status' => 'paid',
         ]);
 
         foreach(array_values($dataCart) as $data){
