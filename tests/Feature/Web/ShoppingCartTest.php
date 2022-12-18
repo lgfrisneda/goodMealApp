@@ -27,12 +27,29 @@ class ShoppingCartTest extends TestCase
         $user = User::factory()->withPersonalTeam()->create();
         $this->actingAs($user);
 
-        $myCart = session('cart') ?? [];
+        Shop::factory(1)->create();
+
+        Product::factory(1)->create();
+
+        $product = Product::latest()->first();
+
+        session()->get('cart');
+        $cart = [
+            $product->id => [
+                'product_name' => $product->name,
+                'quantity' => 1,
+                'amount' => (($product->discount/100) * $product->price) - $product->price,
+            ]
+        ];
+
+        session()->put('cart', $cart);
+
+        $myCart = session('cart');
 
         $this->get(route('shoppingCart.show'))
                 ->assertInertia(fn (Assert $page) => $page
                     ->component('User/ShoppingCart/Show')
-                    ->has('myCart', fn (Assert $page) => $page)
+                    ->has('myCart', 1)
                 );
     }
 
@@ -54,7 +71,7 @@ class ShoppingCartTest extends TestCase
 
         $product = Product::latest()->first();
 
-        $response = $this->get(route('shoppingCart.add', $product));
+        $response = $this->post(route('shoppingCart.add', $product));
         $this->assertCount(1, session('cart'));
     }
 }
