@@ -18,7 +18,6 @@
             <div class="card text-dark shadow bg-body rounded">
                 <div class="pt-0 card-header d-flex justify-content-between bg-white border-0 pb-0">
                     <h5 class="pt-2 card-title fw-bolder mb-0 d-inline">{{ shop.name }}</h5>
-                    <span class="badge bg-success text-white pt-2">Pagar</span>
                 </div>
                 <div class="card-body pt-0">
                     <span class="d-block">Direccion: {{ shop.address }}</span>
@@ -105,7 +104,6 @@ export default defineComponent({
     methods: {
         calculateTotalProducts() {
             var total = 0;
-            console.log(this.myCart)
             for (const [key, value] of Object.entries(this.myCart)) {
                 total += value.amount;
             }

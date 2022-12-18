@@ -11,12 +11,14 @@ class ShopController extends Controller
     public function index()
     {
         $shops = Shop::all()->load('products');
+        session()->forget('cart');
         return $this->view('Shops.Index', compact('shops'));
     }
 
     public function show(Shop $shop)
     {
         $shop->load('products');
-        return $this->view('Shops.Show', compact('shop'));
+        $myCart = (session('cart'))? true: false;
+        return $this->view('Shops.Show', compact('shop', 'myCart'));
     }
 }

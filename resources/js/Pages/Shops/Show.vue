@@ -83,8 +83,13 @@
                 </div>
             </div>
         </div>
-        <ul class="text-center py-4 bg-white sticky-bottom">
-            Comprar
+        <ul class="text-center py-4 sticky-bottom bg-white">
+            <div v-if="!myCart" class="text-muted">
+                Agrega algun producto a tu carrito de compras
+            </div>
+            <Link href="#" class="btn btn-outline-primary btn-lg" v-else @click="this.$inertia.get(route('shoppingCart.show'))">
+                Ir al carrito de compras
+            </Link>
         </ul>
     </div>
 </template>
@@ -101,7 +106,7 @@ export default defineComponent({
         JetNavLink,
         MenuFooter,
     },
-    props: ['shop'],
+    props: ['shop', 'myCart'],
     methods: {
         discount(product){
             var amount_discount = (product.discount_percent/100) * product.price;
