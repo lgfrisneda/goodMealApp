@@ -3,7 +3,7 @@
         <div class="text-center py-2 border-bottom border-2 bg-white sticky-top">
             <div class="d-flex bd-highlight">
                 <div class="p-2 bd-highlight">
-                    <Link href="#" class="btn btn-sm btn-light">
+                    <Link class="btn btn-sm btn-light" :href="route('shops.show', shop.id)">
                         <i class="fa-solid fa-arrow-left fa-2x"></i>
                     </Link>
                 </div>

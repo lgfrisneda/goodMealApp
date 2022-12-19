@@ -1,5 +1,24 @@
 <template>
     <div class="container bg-white">
+        <div class="text-center py-2 border-bottom border-2 bg-white sticky-top">
+            <div class="d-flex bd-highlight">
+                <div class="p-2 bd-highlight">
+                    <Link :href="route('shops.index')" class="btn btn-sm btn-light">
+                        <i class="fa-solid fa-arrow-left fa-2x"></i>
+                    </Link>
+                </div>
+                <div class="me-auto p-2 bd-highlight w-100">
+                    <h3 class="fw-bolder">
+                        {{ shop.name }}
+                    </h3>
+                </div>
+                <div v-show="myCart" class="p-2 bd-highlight">
+                    <Link href="#" class="btn btn-sm btn-light" @click="this.$inertia.get(route('shoppingCart.show'))">
+                        <i class="fa-solid fa-cart-shopping fa-2x"></i>
+                    </Link>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
                 <div class="mb-2">
@@ -14,7 +33,7 @@
                             <h3 class="fw-bolder">Acerca de la tienda</h3>
                             <div>
                                 <i class="fa-sharp fa-solid fa-location-dot fa-lg"></i>
-                                {{ shop.address }}
+                                <span class="pink-official">{{ shop.address }}</span>
                             </div>
                             <div>
                                 <i class="fa-solid fa-clock fa-lg"></i>
@@ -22,7 +41,7 @@
                             </div>
                             <div>
                                 <span class="fw-bolder">Calificacion: </span>
-                                <i class="fa-solid fa-star fa-lg"></i>
+                                <i class="fa-solid fa-star fa-lg pink-official"></i>
                                 4.4 / 5.0
                             </div>
                         </div>
@@ -32,7 +51,7 @@
         </div>
         <ul class="nav d-flex justify-content-between py-2 border-bottom border-2">
             <jet-nav-link href="#" active="#">
-                <span class="text-dark">
+                <span class="pink-official">
                     Ver todo
                 </span>
             </jet-nav-link>
@@ -60,8 +79,8 @@
                         <div class="card-img-overlay h-25">
                             <div class="d-flex justify-content-end">
                                 <div class="position-absolute d-flex justify-content-end">
-                                    <button type="button" @click="addToCart(product)" class="bg-white border border-2 border-danger btn btn-sm btn-link rounded-circle text-decoration-none">
-                                        <i class="fa-solid fa-plus fa-2x text-danger"></i>
+                                    <button type="button" @click="addToCart(product)" class="bg-white border border-2 border-pink btn btn-sm btn-link rounded-circle text-decoration-none">
+                                        <i class="fa-solid fa-plus fa-2x pink-official"></i>
                                     </button>
                                 </div>
                             </div>
@@ -69,7 +88,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-title text-center fw-bolder">
-                            <h5 class="fw-bolder d-inline me-2">{{`$${this.twoDecimals(this.discount(product))}` }}</h5>
+                            <h5 class="fw-bolder d-inline me-2 pink-official">{{`$${this.twoDecimals(this.discount(product))}` }}</h5>
                             <h5 class="text-secondary d-inline text-decoration-line-through">{{`$${this.twoDecimals(product.price)}` }}</h5>
                         </div>
                         <p class="text-center">

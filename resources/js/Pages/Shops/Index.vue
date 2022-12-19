@@ -13,14 +13,14 @@
                     </button>
                 </div>
                 <div class="p-2 bd-highlight">
-                    <button type="button" class="btn btn-sm btn-light">
+                    <button type="button" class="btn btn-sm btn-light bg-pink-light pink-official">
                         <i class="fa-solid fa-sliders"></i>
                     </button>
                 </div>
             </div>
             <ul class="nav d-flex justify-content-between py-2 border-bottom border-2">
                 <jet-nav-link :href="route('shops.index')" :active="route().current('shops.index')">
-                    <span class="text-dark">
+                    <span class="pink-official">
                         Con Stock
                     </span>
                 </jet-nav-link>
@@ -46,8 +46,8 @@
                     </div>
                     <img src="https://picsum.photos/600/300" class="card-img-top" style="height: 90px;" alt="#">
                     <div class="card-img-overlay" style="height: 90px;">
-                        <h5><span class="badge rounded-pill bg-primary">Hoy 09:00 - 19:00 hrs</span></h5>
-                        <h5><span class="badge rounded-pill bg-primary">{{ (shop.options == 'both')? 'pick-up o delivery': shop.options}}</span></h5>
+                        <h5><span class="badge rounded-pill bg-pink">Hoy 09:00 - 19:00 hrs</span></h5>
+                        <h5><span class="badge rounded-pill bg-pink-light pink-official">{{ (shop.options == 'both')? 'pick-up o delivery': shop.options}}</span></h5>
                     </div>
                     <div class="d-flex align-items-center">
                         <div class="position-absolute d-flex justify-content-end me-4">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="card-body h-50 pb-0">
                         <h5 class="card-title fw-bolder mb-0 w-75">{{ shop.name }}</h5>
-                        <p class="card-text fw-bolder">Desde</p>
+                        <p class="card-text fw-bolder pink-official">Desde</p>
                     </div>
                     <div class="card-footer bg-white pt-1">
                         <div class="row">

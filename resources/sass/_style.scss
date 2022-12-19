@@ -1,0 +1,44 @@
+:root{
+  --pink-official: #ff18a6;
+  --pink-light: rgb(252, 233, 248);
+  --blue-sea: #1eb7af;
+  --bs-pink-official-rgb: 255, 24, 166;
+  --bs-pink-light-rgb: 252, 233, 248;
+  --bs-blue-sea-rgb: 30, 183, 175;
+}
+
+.pink-official{
+  color: var(--pink-official);
+}
+
+.blue-sea{
+  color: var(--blue-sea);
+}
+
+.pink-light{
+  color: var(--pink-light);
+}
+
+.border-pink {
+  --bs-border-opacity: 1;
+  border-color: rgba(var(--bs-pink-official-rgb), var(--bs-border-opacity)) !important;
+}
+
+.bg-pink {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-pink-official-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-pink-light {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-pink-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-blue-sea {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-blue-sea-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.nav-link:active {
+  color: var(--pink-official) !important;
+}

@@ -18,8 +18,8 @@
             <div class="col" v-for="order in myOrders" :key="order.id">
                 <div class="card text-dark shadow bg-body rounded">
                     <div class="pt-0 card-header d-flex justify-content-between bg-white border-0 pb-0">
-                        <h5 class="pt-2 card-title fw-bolder mb-0 d-inline">{{ moment(order.created_at).format("DD/MM/YY") }}</h5>
-                        <span class="badge bg-info text-white pt-2">Rescatada</span>
+                        <h5 class="pt-2 card-title fw-bolder mb-0 d-inline blue-sea">{{ moment(order.created_at).format("DD/MM/YY") }}</h5>
+                        <span class="badge bg-blue-sea text-white pt-2">Rescatada</span>
                     </div>
                     <div class="card-body pt-0">
                         <div class="row row-cols-2">
