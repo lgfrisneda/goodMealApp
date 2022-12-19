@@ -13,9 +13,25 @@ use function GuzzleHttp\Promise\all;
 class ShopController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *      path="/api/shops",
+     *      operationId="getShopsList",
+     *      tags={"Shops"},
+     *      summary="Get list of shops",
+     *      description="Returns list of shops",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function index()
     {
@@ -24,10 +40,42 @@ class ShopController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *      path="/api/shops",
+     *      operationId="storeShop",
+     *      tags={"Shops"},
+     *      summary="Store new shop",
+     *      description="Returns shop data",
+     *      @OA\RequestBody(
+     *       required=true,
+     *       @OA\JsonContent(
+     *         required={"name","description","image","options","address","lon","lat"},
+     *         @OA\Property(property="name", type="string", example="Nuevo shop"),
+     *         @OA\Property(property="description", type="string", example="Descripcion de nuevo shop"),
+     *         @OA\Property(property="image", type="string", example="https://via.placeholder.com/640x480.png/005522?text=alias"),
+     *         @OA\Property(property="options", type="string", example="pick-up | delivery | both"),
+     *         @OA\Property(property="address", type="string", example="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt provident recusandae laboriosam rem, ratione id inventore tempora"),
+     *         @OA\Property(property="lon", type="string", example="-66.83921109896633"),
+     *         @OA\Property(property="lat", type="string", example="10.49215828524248"),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
      */
     public function store(ShopStoreRequest $request)
     {
@@ -49,11 +97,55 @@ class ShopController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Shop  $shop
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *      path="/api/shops/{shop}",
+     *      operationId="updateShop",
+     *      tags={"Shops"},
+     *      summary="Update existing shop",
+     *      description="Returns updated shop data",
+     *      @OA\Parameter(
+     *          name="shop",
+     *          description="Shop id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *        @OA\JsonContent(
+     *         required={"name","description","image","options","address","lon","lat"},
+     *         @OA\Property(property="name", type="string", example="Nuevo shop"),
+     *         @OA\Property(property="description", type="string", example="Descripcion de nuevo shop"),
+     *         @OA\Property(property="image", type="string", example="https://via.placeholder.com/640x480.png/005522?text=alias"),
+     *         @OA\Property(property="options", type="string", example="pick-up | delivery | both"),
+     *         @OA\Property(property="address", type="string", example="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt provident recusandae laboriosam rem, ratione id inventore tempora"),
+     *         @OA\Property(property="lon", type="string", example="-66.83921109896633"),
+     *         @OA\Property(property="lat", type="string", example="10.49215828524248"),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=202,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
     public function update(ShopUpdateRequest $request, Shop $shop)
     {
@@ -64,10 +156,39 @@ class ShopController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Shop  $shop
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *      path="/api/shops/{shop}",
+     *      operationId="deleteShop",
+     *      tags={"Shops"},
+     *      summary="Delete existing shop",
+     *      description="Deletes a record and returns no content",
+     *      @OA\Parameter(
+     *          name="shop",
+     *          description="Shop id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Shop Borrado exitosamente",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
     public function destroy(Shop $shop)
     {

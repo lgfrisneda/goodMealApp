@@ -1,0 +1,226 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API GoodMealAPP",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/shops": {
+            "get": {
+                "tags": [
+                    "Shops"
+                ],
+                "summary": "Get list of shops",
+                "description": "Returns list of shops",
+                "operationId": "getShopsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Shops"
+                ],
+                "summary": "Store new shop",
+                "description": "Returns shop data",
+                "operationId": "storeShop",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "image",
+                                    "options",
+                                    "address",
+                                    "lon",
+                                    "lat"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nuevo shop"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descripcion de nuevo shop"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "https://via.placeholder.com/640x480.png/005522?text=alias"
+                                    },
+                                    "options": {
+                                        "type": "string",
+                                        "example": "pick-up | delivery | both"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt provident recusandae laboriosam rem, ratione id inventore tempora"
+                                    },
+                                    "lon": {
+                                        "type": "string",
+                                        "example": "-66.83921109896633"
+                                    },
+                                    "lat": {
+                                        "type": "string",
+                                        "example": "10.49215828524248"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/shops/{shop}": {
+            "put": {
+                "tags": [
+                    "Shops"
+                ],
+                "summary": "Update existing shop",
+                "description": "Returns updated shop data",
+                "operationId": "updateShop",
+                "parameters": [
+                    {
+                        "name": "shop",
+                        "in": "path",
+                        "description": "Shop id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "image",
+                                    "options",
+                                    "address",
+                                    "lon",
+                                    "lat"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nuevo shop"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descripcion de nuevo shop"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "https://via.placeholder.com/640x480.png/005522?text=alias"
+                                    },
+                                    "options": {
+                                        "type": "string",
+                                        "example": "pick-up | delivery | both"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt provident recusandae laboriosam rem, ratione id inventore tempora"
+                                    },
+                                    "lon": {
+                                        "type": "string",
+                                        "example": "-66.83921109896633"
+                                    },
+                                    "lat": {
+                                        "type": "string",
+                                        "example": "10.49215828524248"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Shops"
+                ],
+                "summary": "Delete existing shop",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deleteShop",
+                "parameters": [
+                    {
+                        "name": "shop",
+                        "in": "path",
+                        "description": "Shop id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Shop Borrado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        }
+    }
+}
