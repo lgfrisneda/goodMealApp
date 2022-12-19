@@ -30,9 +30,10 @@ class ProductApiTest extends TestCase
         Product::factory(10)->create();
 
         $this->json('get', route('api.products.index', $shop->id))
-                ->assertStatus(Response::HTTP_OK)
-                ->assertJsonStructure(
-                    [
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure(
+                [
+                    'data' => [
                         '*' => [
                             'id',
                             'shop_id',
@@ -46,7 +47,8 @@ class ProductApiTest extends TestCase
                             'updated_at',
                         ]
                     ]
-                )->assertJsonCount(10);
+                ]
+            )->assertJsonCount(10, 'data');
     }
 
     /**
@@ -72,9 +74,10 @@ class ProductApiTest extends TestCase
         ];
 
         $this->json('post', route('api.products.store', $shop->id), $newData)
-                ->assertStatus(Response::HTTP_OK)
-                ->assertJsonStructure(
-                    [
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure(
+                [
+                    'data' => [
                         'id',
                         'shop_id',
                         'name',
@@ -86,7 +89,8 @@ class ProductApiTest extends TestCase
                         'created_at',
                         'updated_at',
                     ]
-                );
+                ]
+            );
         $this->assertDatabaseHas('products', $newData);
     }
 
@@ -115,9 +119,10 @@ class ProductApiTest extends TestCase
         ];
 
         $this->json('put', route('api.products.update', [$shop->id, $product->id]), $editData)
-                ->assertStatus(Response::HTTP_OK)
-                ->assertJsonStructure(
-                    [
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure(
+                [
+                    'data' => [
                         'id',
                         'shop_id',
                         'name',
@@ -129,7 +134,8 @@ class ProductApiTest extends TestCase
                         'created_at',
                         'updated_at',
                     ]
-                );
+                ]
+            );
     }
 
     /**
@@ -148,7 +154,7 @@ class ProductApiTest extends TestCase
         $product = Product::latest()->first();
 
         $this->json('delete', route('api.products.destroy', [$shop->id, $product->id]))
-                ->assertStatus(Response::HTTP_NO_CONTENT);
+            ->assertStatus(Response::HTTP_NO_CONTENT);
         $this->assertCount(0, Product::all());
     }
 }

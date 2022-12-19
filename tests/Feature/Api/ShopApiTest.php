@@ -25,9 +25,10 @@ class ShopApiTest extends TestCase
         Shop::factory(3)->create();
 
         $this->json('get', route('api.shops.index'))
-                ->assertStatus(Response::HTTP_OK)
-                ->assertJsonStructure(
-                    [
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure(
+                [
+                    'data' => [
                         '*' => [
                             'id',
                             'name',
@@ -41,7 +42,8 @@ class ShopApiTest extends TestCase
                             'updated_at',
                         ]
                     ]
-                )->assertJsonCount(3);
+                ]
+            )->assertJsonCount(3, 'data');
     }
 
     /**
@@ -59,14 +61,15 @@ class ShopApiTest extends TestCase
             'image' => 'https://via.placeholder.com/640x480.png/005522?text=alias',
             'options' => Arr::random(['pick-up', 'delivery', 'both']),
             'address' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt provident recusandae laboriosam rem, ratione id inventore tempora',
-            'lon' => rand($min = -180, $max = 180)/ 10,
-            'lat' => rand($min = -90, $max = 90)/ 10
+            'lon' => rand($min = -180, $max = 180) / 10,
+            'lat' => rand($min = -90, $max = 90) / 10
         ];
 
         $this->json('post', route('api.shops.store'), $newData)
-                ->assertStatus(Response::HTTP_OK)
-                ->assertJsonStructure(
-                    [
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure(
+                [
+                    'data' => [
                         'id',
                         'name',
                         'description',
@@ -78,7 +81,8 @@ class ShopApiTest extends TestCase
                         'created_at',
                         'updated_at',
                     ]
-                );
+                ]
+            );
         $this->assertDatabaseHas('shops', $newData);
     }
 
@@ -101,14 +105,15 @@ class ShopApiTest extends TestCase
             'image' => 'https://via.placeholder.com/640x480.png/005522?text=alias',
             'options' => Arr::random(['pick-up', 'delivery', 'both']),
             'address' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt provident recusandae laboriosam rem, ratione id inventore tempora editado',
-            'lon' => rand($min = -180, $max = 180)/ 10,
-            'lat' => rand($min = -90, $max = 90)/ 10
+            'lon' => rand($min = -180, $max = 180) / 10,
+            'lat' => rand($min = -90, $max = 90) / 10
         ];
 
         $this->json('put', route('api.shops.update', $shop->id), $editData)
-                ->assertStatus(Response::HTTP_OK)
-                ->assertJsonStructure(
-                    [
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure(
+                [
+                    'data' => [
                         'id',
                         'name',
                         'description',
@@ -120,7 +125,8 @@ class ShopApiTest extends TestCase
                         'created_at',
                         'updated_at',
                     ]
-                );
+                ]
+            );
     }
 
     /**
@@ -137,8 +143,7 @@ class ShopApiTest extends TestCase
         $shop = Shop::latest()->first();
 
         $this->json('delete', route('api.shops.destroy', $shop->id))
-                ->assertStatus(Response::HTTP_NO_CONTENT);
+            ->assertStatus(Response::HTTP_NO_CONTENT);
         $this->assertCount(0, Shop::all());
     }
-
 }

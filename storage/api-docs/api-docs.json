@@ -5,6 +5,220 @@
         "version": "1.0"
     },
     "paths": {
+        "/api/shops/{shop}/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get list of Products from Shop",
+                "description": "Returns list of Products from Shop",
+                "operationId": "getProductsFromShop",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Shop--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Products"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Insert a new Product",
+                "description": "Insert a new Product",
+                "operationId": "storeProduct",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Shop--id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "image",
+                                    "stock",
+                                    "price",
+                                    "discount_percent"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nuevo producto"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descripcion de nuevo producto"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "https://via.placeholder.com/640x480.png/006655?text=beatae"
+                                    },
+                                    "stock": {
+                                        "type": "string",
+                                        "example": "20"
+                                    },
+                                    "price": {
+                                        "type": "string",
+                                        "example": "150.50"
+                                    },
+                                    "discount_percent": {
+                                        "type": "string",
+                                        "example": "20"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Product"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/api/shops/{shop}/products/{product}": {
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update an existing Product",
+                "description": "Update an existing Product",
+                "operationId": "updateProduct",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Shop--id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Product--id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "image",
+                                    "stock",
+                                    "price",
+                                    "discount_percent"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nuevo producto"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descripcion de nuevo producto"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "https://via.placeholder.com/640x480.png/006655?text=beatae"
+                                    },
+                                    "stock": {
+                                        "type": "string",
+                                        "example": "20"
+                                    },
+                                    "price": {
+                                        "type": "string",
+                                        "example": "150.50"
+                                    },
+                                    "discount_percent": {
+                                        "type": "string",
+                                        "example": "20"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete a Product",
+                "description": "Delete a Product",
+                "operationId": "destroyProduct",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Shop--id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Product--id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Producto Borrado Exitoso"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
         "/api/shops": {
             "get": {
                 "tags": [
@@ -194,9 +408,7 @@
                         "description": "Resource Not Found"
                     }
                 }
-            }
-        },
-        "/shops/{shop}": {
+            },
             "delete": {
                 "tags": [
                     "Shops"
@@ -222,6 +434,88 @@
     },
     "components": {
         "schemas": {
+            "Product": {
+                "title": "Product",
+                "description": "Product model",
+                "required": [],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of Product",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "shop_id": {
+                        "title": "shop_id",
+                        "description": "id of shop",
+                        "type": "string",
+                        "example": "1'"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of Product",
+                        "type": "string",
+                        "example": "Nuevo producto'"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "description of Product",
+                        "type": "string",
+                        "example": "Descripcion de nuevo producto'"
+                    },
+                    "image": {
+                        "title": "image",
+                        "description": "image of Product",
+                        "type": "string",
+                        "example": "https://via.placeholder.com/640x480.png/006655?text=beatae'"
+                    },
+                    "stock": {
+                        "title": "stock",
+                        "description": "stock of Product",
+                        "type": "string",
+                        "example": "45"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "price of Product",
+                        "type": "string",
+                        "example": "150.50"
+                    },
+                    "discount_percent": {
+                        "title": "discount_percent",
+                        "description": "Discount (percent) of Product",
+                        "type": "string",
+                        "example": "20"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Products": {
+                "title": "Products",
+                "properties": {
+                    "data": {
+                        "title": "data",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Product"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "Shop": {
                 "title": "Shop",
                 "description": "Shop model",
@@ -294,8 +588,8 @@
             "Shops": {
                 "title": "Shops",
                 "properties": {
-                    "*": {
-                        "title": "*",
+                    "data": {
+                        "title": "data",
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/Shop"
@@ -306,6 +600,16 @@
             }
         },
         "parameters": {
+            "Product--id": {
+                "name": "product",
+                "in": "path",
+                "description": "Id of Product",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": "1"
+                }
+            },
             "Shop--id": {
                 "name": "shop",
                 "in": "path",

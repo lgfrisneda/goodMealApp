@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @OA\Schema(
  *   schema="Shops",
  *   title="Shops",
- *   @OA\Property(title="*",property="*",type="array",
+ *   @OA\Property(title="data",property="data",type="array",
  *     @OA\Items(type="object",ref="#/components/schemas/Shop"),
  *   )
  * )

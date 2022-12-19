@@ -33,7 +33,7 @@ class ShopController extends Controller
     public function index()
     {
         $shops = Shop::all();
-        return response()->json($shops);
+        return response()->json(['data' => $shops]);
     }
 
     /**
@@ -76,7 +76,7 @@ class ShopController extends Controller
         $dataValidated = $request->validated();
         $newShop = Shop::create($dataValidated);
 
-        return response()->json($newShop);
+        return response()->json(['data' => $newShop]);
     }
 
     /**
@@ -143,7 +143,7 @@ class ShopController extends Controller
         $dataValidated = $request->validated();
         $shop->update($dataValidated);
 
-        return response()->json($shop->fresh());
+        return response()->json(['data' => $shop->fresh()]);
     }
 
     /**
