@@ -58,7 +58,6 @@
                 </div>
             </div>
         </div>
-        <menu-footer/>
     </div>
 </template>
 
@@ -66,14 +65,14 @@
 import { defineComponent } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import JetNavLink from '@/Jetstream/NavLink.vue'
-import MenuFooter from '@/components/MenuFooter.vue'
+import Template from '@/Layouts/Template.vue'
 import moment from 'moment';
 
 export default defineComponent({
+    layout:Template,
     components: {
         Link,
         JetNavLink,
-        MenuFooter,
     },
     data() {
         return {

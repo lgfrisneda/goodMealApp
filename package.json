@@ -32,6 +32,8 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
-        "moment": "^2.29.4"
+        "moment": "^2.29.4",
+        "vue-sweetalert2": "^5.0.2",
+        "vue-toast-notification": "^3.0.0"
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="container bg-white">
+    <div class=" bg-white">
         <div class="text-center py-2 border-bottom border-2 bg-white sticky-top">
             <div class="d-flex bd-highlight">
                 <div class="p-2 bd-highlight">
@@ -13,8 +13,12 @@
                     </h3>
                 </div>
                 <div v-show="myCart" class="p-2 bd-highlight">
-                    <Link href="#" class="btn btn-sm btn-light" @click="this.$inertia.get(route('shoppingCart.show'))">
+                    <Link href="#" class="btn btn-sm btn-light position-relative" @click="this.$inertia.get(route('shoppingCart.show'))">
                         <i class="fa-solid fa-cart-shopping fa-2x"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                !
+                            <span class="visually-hidden">Productos en carrito</span>
+                        </span>
                     </Link>
                 </div>
             </div>
@@ -102,12 +106,16 @@
                 </div>
             </div>
         </div>
-        <ul class="text-center py-4 sticky-bottom bg-white">
+        <ul class="text-center py-4 bg-white">
             <div v-if="!myCart" class="text-muted">
                 Agrega algun producto a tu carrito de compras
             </div>
-            <Link href="#" class="btn btn-outline-primary btn-lg" v-else @click="this.$inertia.get(route('shoppingCart.show'))">
+            <Link href="#" class="btn btn-outline-primary btn-lg position-relative" v-else @click="this.$inertia.get(route('shoppingCart.show'))">
                 Ir al carrito de compras
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    !
+                <span class="visually-hidden">Productos en carrito</span>
+                </span>
             </Link>
         </ul>
     </div>
@@ -117,13 +125,13 @@
 import { defineComponent } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import JetNavLink from '@/Jetstream/NavLink.vue'
-import MenuFooter from '@/components/MenuFooter.vue'
+import Template from '@/Layouts/Template.vue'
 
 export default defineComponent({
+    layout:Template,
     components: {
         Link,
         JetNavLink,
-        MenuFooter,
     },
     props: ['shop', 'myCart'],
     methods: {

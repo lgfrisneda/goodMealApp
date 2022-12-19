@@ -26,23 +26,23 @@
                     <div class="row" v-for="(product, index) in myCart" :key="index">
                         <div class="col-2">
                             {{ product.quantity }}
-                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <!-- <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                 <button type="button" class="btn btn-sm btn-outline-primary">
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">
                                     <i class="fa-solid fa-minus"></i>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-6">
                             {{ product.product_name }}
                         </div>
                         <div class="col text-end me-2">
                             {{`$${product.amount}`}}
-                            <button type="button" class="btn btn-sm btn-outline-danger">
+                            <!-- <button type="button" class="btn btn-sm btn-outline-danger">
                                 <i class="fa-solid fa-xmark"></i>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                     <hr>
@@ -70,7 +70,6 @@
                 </div>
             </div>
         </div>
-        <menu-footer/>
     </div>
 </template>
 
@@ -78,14 +77,14 @@
 import { defineComponent } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import JetNavLink from '@/Jetstream/NavLink.vue'
-import MenuFooter from '@/components/MenuFooter.vue'
+import Template from '@/Layouts/Template.vue'
 import moment from 'moment';
 
 export default defineComponent({
+    layout:Template,
     components: {
         Link,
         JetNavLink,
-        MenuFooter,
     },
     data() {
         return {
