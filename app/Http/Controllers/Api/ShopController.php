@@ -22,11 +22,8 @@ class ShopController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Shops"),
      *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
@@ -62,14 +59,11 @@ class ShopController extends Controller
      *      @OA\Response(
      *          response=201,
      *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Shops"),
      *       ),
      *      @OA\Response(
      *          response=400,
      *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
      *      ),
      *      @OA\Response(
      *          response=403,
@@ -128,14 +122,11 @@ class ShopController extends Controller
      *      @OA\Response(
      *          response=202,
      *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Shops"),
      *       ),
      *      @OA\Response(
      *          response=400,
      *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
      *      ),
      *      @OA\Response(
      *          response=403,
@@ -157,38 +148,18 @@ class ShopController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/api/shops/{shop}",
-     *      operationId="deleteShop",
-     *      tags={"Shops"},
-     *      summary="Delete existing shop",
-     *      description="Deletes a record and returns no content",
-     *      @OA\Parameter(
-     *          name="shop",
-     *          description="Shop id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=204,
-     *          description="Shop Borrado exitosamente",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Resource Not Found"
-     *      )
+     *  path="/api/shops/{shop}",
+     *  summary="Delete a Shop",
+     *  description="Delete a Shop",
+     *  operationId="destroyShop",
+     *  tags={"Shops"},
+     *  @OA\Parameter(ref="#/components/parameters/Shop--id"),
+     *  @OA\Response(response=204,description="No content"),
+     *  @OA\Response(response=404,description="Shop not found"),
      * )
+     *
+     * @param Shop $Shop
+     * @return Response|JsonResponse
      */
     public function destroy(Shop $shop)
     {

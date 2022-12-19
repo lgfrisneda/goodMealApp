@@ -15,10 +15,14 @@
                 "operationId": "getShopsList",
                 "responses": {
                     "200": {
-                        "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Shops"
+                                }
+                            }
+                        }
                     },
                     "403": {
                         "description": "Forbidden"
@@ -83,13 +87,17 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Successful operation"
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Shops"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
                     },
                     "403": {
                         "description": "Forbidden"
@@ -167,13 +175,17 @@
                 },
                 "responses": {
                     "202": {
-                        "description": "Successful operation"
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Shops"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
                     },
                     "403": {
                         "description": "Forbidden"
@@ -182,43 +194,126 @@
                         "description": "Resource Not Found"
                     }
                 }
-            },
+            }
+        },
+        "/shops/{shop}": {
             "delete": {
                 "tags": [
                     "Shops"
                 ],
-                "summary": "Delete existing shop",
-                "description": "Deletes a record and returns no content",
-                "operationId": "deleteShop",
+                "summary": "Delete a Shop",
+                "description": "Delete a Shop",
+                "operationId": "destroyShop",
                 "parameters": [
                     {
-                        "name": "shop",
-                        "in": "path",
-                        "description": "Shop id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "$ref": "#/components/parameters/Shop--id"
                     }
                 ],
                 "responses": {
                     "204": {
-                        "description": "Shop Borrado exitosamente",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
+                        "description": "No content"
                     },
                     "404": {
-                        "description": "Resource Not Found"
+                        "description": "Shop not found"
                     }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Shop": {
+                "title": "Shop",
+                "description": "Shop model",
+                "required": [],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of Shop",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of Shop",
+                        "type": "string",
+                        "example": "Nuevo shop"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "description of Shop",
+                        "type": "string",
+                        "example": "Descripcion de nuevo shop"
+                    },
+                    "image": {
+                        "title": "image",
+                        "description": "image of Shop",
+                        "type": "string",
+                        "example": "https://via.placeholder.com/640x480.png/005522?text=alias"
+                    },
+                    "options": {
+                        "title": "options",
+                        "description": "options of Shop",
+                        "type": "string",
+                        "example": "pick-up || delivery || both"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "address of Shop",
+                        "type": "string",
+                        "example": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt provident recusandae laboriosam rem, ratione id inventore tempora"
+                    },
+                    "lon": {
+                        "title": "lon",
+                        "description": "lon of Shop",
+                        "type": "string",
+                        "example": "-66.83921109896633"
+                    },
+                    "lat": {
+                        "title": "lat",
+                        "description": "lat of Shop",
+                        "type": "string",
+                        "example": "10.49215828524248"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-12-19T02:41:42.336Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-12-19T02:41:42.336Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Shops": {
+                "title": "Shops",
+                "properties": {
+                    "*": {
+                        "title": "*",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Shop"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "Shop--id": {
+                "name": "shop",
+                "in": "path",
+                "description": "Id of Shop",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": "1"
                 }
             }
         }
