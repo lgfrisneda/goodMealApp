@@ -33,8 +33,8 @@ Comandos a ejecutar para puesta a punto del proyecto:
 
 ## Credenciales para web
 
-user: user@example.com
-password: password
+- user: user@example.com
+- password: password
 
 ### API
 
