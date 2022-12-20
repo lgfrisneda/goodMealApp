@@ -9,7 +9,7 @@
             <Link v-if="$page.props.user" :href="route('dashboard')" class="text-muted">
               Dashboard
             </Link>
-            <Link v-if="$page.props.user" :href="route('shops')" class="text-muted">
+            <Link v-if="$page.props.user" :href="route('shops.index')" class="ms-3 text-muted">
               Shops
             </Link>
 
