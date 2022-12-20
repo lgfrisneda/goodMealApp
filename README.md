@@ -39,4 +39,4 @@ Comandos a ejecutar para puesta a punto del proyecto:
 ### API
 
 * De acceso libre (sin autenticacion)
-- Documentacion: rootNameProject/api/docs
+- Documentacion: http://rootNameProject/api/docs
