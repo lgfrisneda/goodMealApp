@@ -33,21 +33,32 @@
                                 <img class="rounded-circle border border-white border-1 w-50" :src="shop.image" :alt="shop.name">
                             </div>
                         </div>
-                        <div class="py-4 w-50">
+                        <div class="py-4 w-50 mx-4">
                             <h3 class="fw-bolder">Acerca de la tienda</h3>
-                            <div>
-                                <i class="fa-sharp fa-solid fa-location-dot fa-lg"></i>
-                                <span class="pink-official">{{ shop.address }}</span>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="fa-sharp fa-solid fa-location-dot fa-2xl"></i>
+                                </div>
+                                <div class="col ps-0">
+                                    <span class="pink-official">{{ shop.address }}</span>
+                                </div>
                             </div>
-                            <div>
-                                <i class="fa-solid fa-clock fa-lg"></i>
-                                Hora de retiro: Hoy de 09:00 a 21:00 hrs
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="fa-solid fa-clock fa-xl"></i>
+                                </div>
+                                <div class="col ps-0">
+                                    Hora de retiro: Hoy de 09:00 a 21:00 hrs
+                                </div>
                             </div>
-                            <div>
-                                <span class="fw-bolder">Calificacion: </span>
-                                <i class="fa-solid fa-star fa-lg pink-official"></i>
-                                4.4 / 5.0
-                            </div>
+                        </div>
+                        <div class="mx-4">
+                            <span class="fw-bolder">Calificacion: </span>
+                            <i class="fa-solid fa-star fa-lg pink-official"></i>
+                            4.4 / 5.0
+                            <a href="#" class="pink-official text-decoration-none">
+                                Ver mas <i class="fa-solid fa-chevron-down fa-xl"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
