@@ -29951,7 +29951,7 @@ var _hoisted_6 = {
   "class": "pt-2 card-title fw-bolder mb-0 d-inline blue-sea"
 };
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "badge bg-blue-sea text-white pt-2"
+  "class": "badge bg-blue-sea text-white rounded-0 rounded-bottom mb-2"
 }, "Rescatada", -1 /* HOISTED */);
 var _hoisted_8 = {
   "class": "card-body pt-0"
@@ -30047,7 +30047,7 @@ var _hoisted_10 = {
   "class": "pt-2 card-title fw-bolder mb-0 d-inline"
 };
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "badge bg-blue-sea text-white pt-2"
+  "class": "badge bg-blue-sea text-white rounded-0 rounded-bottom mb-2"
 }, "Rescatada", -1 /* HOISTED */);
 var _hoisted_12 = {
   "class": "card-body pt-0"

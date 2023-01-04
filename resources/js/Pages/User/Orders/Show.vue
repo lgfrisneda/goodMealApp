@@ -18,7 +18,7 @@
             <div class="card text-dark shadow bg-body rounded">
                 <div class="pt-0 card-header d-flex justify-content-between bg-white border-0 pb-0">
                     <h5 class="pt-2 card-title fw-bolder mb-0 d-inline">{{ myOrder.shop.name }}</h5>
-                    <span class="badge bg-blue-sea text-white pt-2">Rescatada</span>
+                    <span class="badge bg-blue-sea text-white rounded-0 rounded-bottom mb-2">Rescatada</span>
                 </div>
                 <div class="card-body pt-0">
                     <span class="d-block">Direccion: {{ myOrder.shop.address }}</span>
