@@ -24,10 +24,10 @@
                     <div class="card-body pt-0">
                         <div class="row row-cols-2">
                             <div class="col">
-                                <span class="d-block">Tienda: {{ order.shop.name }}</span>
-                                <span class="d-block">N° de orden: {{ order.id }}</span>
-                                <span class="d-block">Monto total: {{ twoDecimals(calculateTotal(order)) }}</span>
-                                <span class="d-block">Horario: 09:00 a 16:00</span>
+                                <div class="d-block"><span class="fw-bolder">Tienda:</span> {{ order.shop.name }}</div>
+                                <div class="d-block"><span class="fw-bolder">N° de orden:</span> {{ order.id }}</div>
+                                <div class="d-block"><span class="fw-bolder">Monto total:</span> {{ `$${twoDecimals(calculateTotal(order))}` }}</div>
+                                <div class="d-block"><span class="fw-bolder">Horario:</span> 09:00 a 16:00</div>
                             </div>
                             <div class="col text-end mt-4">
                                 <Link :href="route('orders.show', order)" class="btn btn-sm btn-light">

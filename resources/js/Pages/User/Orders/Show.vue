@@ -21,12 +21,12 @@
                     <span class="badge bg-blue-sea text-white rounded-0 rounded-bottom mb-2">Rescatada</span>
                 </div>
                 <div class="card-body pt-0">
-                    <span class="d-block">Direccion: {{ myOrder.shop.address }}</span>
-                    <span class="d-block">Horario de retiro: 09:00 a 16:00 hrs</span>
-                    <span class="d-block">Fecha de retiro: {{ moment(myOrder.created_at).format("DD/MM/YY") }}</span>
-                    <span class="d-block">N° de orden: {{ myOrder.id }}</span>
+                    <div class="d-block"><span class="fw-bolder">Direccion:</span> {{ myOrder.shop.address }}</div>
+                    <div class="d-block"><span class="fw-bolder">Horario de retiro:</span>  09:00 a 16:00 hrs</div>
+                    <div class="d-block"><span class="fw-bolder">Fecha de retiro:</span>  {{ moment(myOrder.created_at).format("DD/MM/YY") }}</div>
+                    <div class="d-block"><span class="fw-bolder">N° de orden:</span>  {{ myOrder.id }}</div>
                     <hr>
-                    <span class="d-block">Productos</span>
+                    <span class="d-block fw-bolder">Productos</span>
                     <div class="row" v-for="detail in myOrder.details" :key="detail.id">
                         <div class="col-2">
                             {{ detail.quantity }}
@@ -47,7 +47,7 @@
                             {{ `$${twoDecimals(this.amount_delivery)}` }}
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row fw-bolder">
                         <div class="col">
                             Monto total
                         </div>
