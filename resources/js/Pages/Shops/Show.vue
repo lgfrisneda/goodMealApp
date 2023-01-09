@@ -12,7 +12,7 @@
                         {{ shop.name }}
                     </h3>
                 </div>
-                <div v-show="myCart" class="p-2 bd-highlight">
+                <div v-show="$page.props.auth.myCart" class="p-2 bd-highlight">
                     <Link href="#" class="btn btn-sm btn-light position-relative" @click="this.$inertia.get(route('shoppingCart.show'))">
                         <i class="fa-solid fa-cart-shopping fa-2x"></i>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -118,7 +118,7 @@
             </div>
         </div>
         <ul class="text-center py-4 bg-white">
-            <div v-if="!myCart" class="text-muted">
+            <div v-if="!$page.props.auth.myCart" class="text-muted">
                 Agrega algun producto a tu carrito de compras
             </div>
             <Link href="#" class="btn btn-outline-primary btn-lg position-relative" v-else @click="this.$inertia.get(route('shoppingCart.show'))">
@@ -144,7 +144,7 @@ export default defineComponent({
         Link,
         JetNavLink,
     },
-    props: ['shop', 'myCart'],
+    props: ['shop'],
     methods: {
         discount(product){
             var amount_discount = (product.discount_percent/100) * product.price;
