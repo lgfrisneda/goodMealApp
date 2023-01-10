@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class OrderController extends Controller
 {
@@ -22,7 +23,7 @@ class OrderController extends Controller
         ]);
 
         foreach(array_values($dataCart) as $data){
-            $orderCreated->details()->create($data);
+            $orderCreated->details()->create(Arr::except($data, ['amount_unit']));
         }
 
         session()->forget('cart');

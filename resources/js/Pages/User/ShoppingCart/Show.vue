@@ -24,25 +24,25 @@
                     <hr>
                     <span class="d-block">Productos</span>
                     <div class="row" v-for="(product, index) in myCart" :key="index">
-                        <div class="col-2">
+                        <div class="col-3">
                             {{ product.quantity }}
-                            <!-- <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <button type="button" class="btn btn-sm btn-outline-primary">
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                <button type="button" @click="editToCart(index, 'add')" class="btn btn-sm btn-outline-primary">
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">
+                                <button v-show="product.quantity > 1" type="button" @click="editToCart(index, 'remove')" class="btn btn-sm btn-outline-secondary">
                                     <i class="fa-solid fa-minus"></i>
                                 </button>
-                            </div> -->
+                            </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-5">
                             {{ product.product_name }}
                         </div>
                         <div class="col text-end me-2">
                             {{`$${product.amount}`}}
-                            <!-- <button type="button" class="btn btn-sm btn-outline-danger">
+                            <button type="button" @click="removeElementToCart(index)" class="btn btn-sm btn-outline-danger">
                                 <i class="fa-solid fa-xmark"></i>
-                            </button> -->
+                            </button>
                         </div>
                     </div>
                     <hr>
@@ -114,6 +114,29 @@ export default defineComponent({
         },
         calculateTotal(){
             return this.calculateTotalProducts() + this.amount_delivery
+        },
+        discount(product){
+            var amount_discount = (product.discount_percent/100) * product.price;
+            return product.price - amount_discount;
+        },
+        editToCart(productId, option){
+            this.$inertia.patch(route('shoppingCart.update'), {
+                option,
+                productId
+            }, {
+                onSuccess: () => {
+                    this.amount_delivery = this.calculateDelivery() ?? 0;
+                    this.amount_total = this.calculateTotal();
+                }
+            });
+        },
+        removeElementToCart(productId){
+            this.$inertia.delete(route('shoppingCart.remove', {productId}), {
+                onSuccess: () => {
+                    this.amount_delivery = this.calculateDelivery() ?? 0;
+                    this.amount_total = this.calculateTotal();
+                }
+            });
         }
     }
 
