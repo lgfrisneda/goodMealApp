@@ -71,7 +71,7 @@
                                 <i class="fa-sharp fa-solid fa-location-dot fa-lg"></i>
                                 distance
                             </div>
-                            <div class="col-5 text-end">
+                            <div class="col-4 text-end">
                                 <Link :href="route('shops.show', shop)" class="text-decoration-none text-dark">
                                     <h4 class="fw-bolder d-inline me-2">{{ shop.products.length }}</h4>
                                     <i class="fa-solid fa-bag-shopping fa-2x"></i>

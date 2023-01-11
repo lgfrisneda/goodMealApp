@@ -1,19 +1,19 @@
 <template>
-    <div class="container">
-        <div class="text-center py-2 border-bottom border-2 bg-white sticky-top">
-            <div class="d-flex bd-highlight">
-                <div class="p-2 bd-highlight">
-                    <Link class="btn btn-sm btn-light" :href="route('shops.show', shop.id)">
-                        <i class="fa-solid fa-arrow-left fa-2x"></i>
-                    </Link>
-                </div>
-                <div class="me-auto p-2 bd-highlight w-100">
-                    <h3 class="fw-bolder">
-                        Carrito de compras
-                    </h3>
-                </div>
+    <div class="text-center py-2 border-bottom border-2 bg-white sticky-top">
+        <div class="d-flex bd-highlight">
+            <div class="p-2 bd-highlight">
+                <Link class="btn btn-sm btn-light" :href="route('shops.show', shop.id)">
+                    <i class="fa-solid fa-arrow-left fa-2x"></i>
+                </Link>
+            </div>
+            <div class="me-auto p-2 bd-highlight w-100">
+                <h3 class="fw-bolder">
+                    Carrito de compras
+                </h3>
             </div>
         </div>
+    </div>
+    <div class="container">
         <div class="my-2">
             <div class="card text-dark shadow bg-body rounded">
                 <div class="pt-0 card-header d-flex justify-content-between bg-white border-0 pb-0">

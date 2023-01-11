@@ -1,19 +1,19 @@
 <template>
-    <div class="container">
-        <div class="text-center py-2 border-bottom border-2 bg-white sticky-top">
-            <div class="d-flex bd-highlight">
-                <div class="me-auto p-2 bd-highlight w-100">
-                    <h3 class="fw-bolder">
-                        Mis Ordenes
-                    </h3>
-                </div>
-                <div class="p-2 bd-highlight">
-                    <button type="button" class="btn btn-sm btn-light">
-                        <i class="fa-solid fa-headset fa-2x"></i>
-                    </button>
-                </div>
+    <div class="text-center py-2 border-bottom border-2 bg-white sticky-top">
+        <div class="d-flex bd-highlight">
+            <div class="me-auto p-2 bd-highlight w-100">
+                <h3 class="fw-bolder">
+                    Mis Ordenes
+                </h3>
+            </div>
+            <div class="p-2 bd-highlight">
+                <button type="button" class="btn btn-sm btn-light">
+                    <i class="fa-solid fa-headset fa-2x"></i>
+                </button>
             </div>
         </div>
+    </div>
+    <div class="container">
         <div class="my-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             <div class="col" v-for="order in myOrders" :key="order.id">
                 <div class="card text-dark shadow bg-body rounded">
