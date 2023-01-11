@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class OrderController extends Controller
 {
@@ -21,9 +22,11 @@ class OrderController extends Controller
             'status' => 'paid',
         ]);
 
-        foreach(array_values($dataCart) as $data){
-            $orderCreated->details()->create($data);
-        }
+        $dataCart = array_map(function(array $element){
+            unset($element['amount_unit']);
+            return $element;
+        }, $dataCart);
+        $orderCreated->details()->createMany($dataCart);
 
         session()->forget('cart');
 
