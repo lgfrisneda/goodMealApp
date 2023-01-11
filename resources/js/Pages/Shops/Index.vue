@@ -42,6 +42,9 @@
                     <div class="d-flex justify-content-end">
                         <div class="position-absolute me-3">
                             <i class="fa-solid fa-bookmark fa-3x text-secondary"></i>
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="currentColor" class="bi bi-bookmark-heart-fill" viewBox="0 0 16 16">
+                                <path d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v13.5zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
+                            </svg> -->
                         </div>
                     </div>
                     <img src="https://picsum.photos/600/300" class="card-img-top" style="height: 90px;" alt="#">
@@ -68,7 +71,7 @@
                                 <i class="fa-sharp fa-solid fa-location-dot fa-lg"></i>
                                 distance
                             </div>
-                            <div class="col-5 text-end">
+                            <div class="col-4 text-end">
                                 <Link :href="route('shops.show', shop)" class="text-decoration-none text-dark">
                                     <h4 class="fw-bolder d-inline me-2">{{ shop.products.length }}</h4>
                                     <i class="fa-solid fa-bag-shopping fa-2x"></i>

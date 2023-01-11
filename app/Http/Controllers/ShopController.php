@@ -18,7 +18,6 @@ class ShopController extends Controller
     public function show(Shop $shop)
     {
         $shop->load('products');
-        $myCart = (session('cart'))? true: false;
-        return $this->view('Shops.Show', compact('shop', 'myCart'));
+        return $this->view('Shops.Show', compact('shop'));
     }
 }

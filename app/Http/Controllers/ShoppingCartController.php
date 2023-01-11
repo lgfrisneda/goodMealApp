@@ -30,6 +30,7 @@ class ShoppingCartController extends Controller
                     $product->id => [
                         'product_name' => $product->name,
                         'quantity' => 1,
+                        'amount_unit' => $request->amount_discount,
                         'amount' => $request->amount_discount,
                     ]
             ];
@@ -41,6 +42,7 @@ class ShoppingCartController extends Controller
                 $cart[$product->id] = [
                     'product_name' => $product->name,
                     'quantity' => 1,
+                    'amount_unit' => $request->amount_discount,
                     'amount' => $request->amount_discount,
                 ];
             }
@@ -54,24 +56,25 @@ class ShoppingCartController extends Controller
 
     public function update(Request $request)
     {
-        if($request->id && $request->quantity){
+        if($request->productId && $request->option){
             $cart = session()->get('cart');
-            $cart[$request->id]['quantity'] = $request->quantity;
+            $cart[$request->productId]['quantity'] = ($request->option == 'add')? ++$cart[$request->productId]['quantity']: --$cart[$request->productId]['quantity'];
+            $cart[$request->productId]['amount'] = $cart[$request->productId]['amount_unit'] * $cart[$request->productId]['quantity'];
             session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Carrito actualizado exitosamente');
+            return back()->with('success', 'Carrito actualizado exitosamente');
         }
     }
 
     public function remove(Request $request)
     {
-        if($request->id){
+        if($request->productId){
             $cart = session()->get('cart');
-
-            if(isset($cart[$request->id])){
-                unset($cart[$request->id]);
+            
+            if(isset($cart[$request->productId])){
+                unset($cart[$request->productId]);
                 session()->put('cart', $cart);
             }
-            return redirect()->back()->with('success', 'Producto removido exitosamente');
+            return back()->with('success', 'Producto removido exitosamente');
         }
     }
 

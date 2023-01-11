@@ -57,6 +57,9 @@ class HandleInertiaRequests extends Middleware
                     return $request->session()->get('info');
                 },
             ],
+            'auth' => [
+                'myCart' => session('cart')? true: false,
+            ]
         ]);
     }
 }
