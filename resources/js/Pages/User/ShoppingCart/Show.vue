@@ -95,9 +95,7 @@ export default defineComponent({
     },
     props: ['myCart', 'shop'],
     mounted(){
-        if(this.shop.delivery){
-            this.amount_delivery = this.calculateDelivery();
-        }
+        this.calculateDelivery();
         this.amount_total = this.calculateTotal();
     },
     methods: {
@@ -110,7 +108,11 @@ export default defineComponent({
             return total;
         },
         calculateDelivery(){
-            return (this.shop.delivery.percent/100) * this.calculateTotalProducts(this.myCart)
+            if(this.shop.delivery){
+                this.amount_delivery = (this.shop.delivery.percent/100) * this.calculateTotalProducts(this.myCart)
+            }
+
+            return this.amount_delivery;
         },
         calculateTotal(){
             return this.calculateTotalProducts() + this.amount_delivery
@@ -125,7 +127,14 @@ export default defineComponent({
                 productId
             }, {
                 onSuccess: () => {
-                    this.amount_delivery = this.calculateDelivery() ?? 0;
+                    if (!Object.values(this.$page.props.messages).every(element => element === null)) {
+                        let to_toast = Object.entries(this.$page.props.messages).find(([key, value]) => value !== null);
+                        this.$toast.open({
+                            message: to_toast[1],
+                            type: to_toast[0],
+                        });
+                    }
+                    this.amount_delivery = this.calculateDelivery();
                     this.amount_total = this.calculateTotal();
                 }
             });
@@ -133,7 +142,14 @@ export default defineComponent({
         removeElementToCart(productId){
             this.$inertia.delete(route('shoppingCart.remove', {productId}), {
                 onSuccess: () => {
-                    this.amount_delivery = this.calculateDelivery() ?? 0;
+                    if (!Object.values(this.$page.props.messages).every(element => element === null)) {
+                        let to_toast = Object.entries(this.$page.props.messages).find(([key, value]) => value !== null);
+                        this.$toast.open({
+                            message: to_toast[1],
+                            type: to_toast[0],
+                        });
+                    }
+                    this.amount_delivery = this.calculateDelivery();
                     this.amount_total = this.calculateTotal();
                 }
             });

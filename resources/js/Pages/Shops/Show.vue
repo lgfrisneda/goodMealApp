@@ -154,6 +154,16 @@ export default defineComponent({
             var amount_discount = this.twoDecimals(this.discount(product));
             this.$inertia.post(route('shoppingCart.add', product), {
                 amount_discount: amount_discount
+            },{
+                onSuccess: () => {
+                    if (!Object.values(this.$page.props.messages).every(element => element === null)) {
+                        let to_toast = Object.entries(this.$page.props.messages).find(([key, value]) => value !== null);
+                        this.$toast.open({
+                            message: to_toast[1],
+                            type: to_toast[0],
+                        });
+                    }
+                },
             });
         }
     }

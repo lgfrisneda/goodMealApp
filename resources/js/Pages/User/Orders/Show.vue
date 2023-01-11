@@ -87,6 +87,14 @@ export default defineComponent({
             this.amount_delivery = this.calculateDelivery();
         }
         this.amount_total = this.calculateTotal();
+
+        if (!Object.values(this.$page.props.messages).every(element => element === null)) {
+            let to_toast = Object.entries(this.$page.props.messages).find(([key, value]) => value !== null);
+            this.$toast.open({
+                message: to_toast[1],
+                type: to_toast[0],
+            });
+        }
     },
     methods: {
         calculateTotalProducts() {

@@ -61,7 +61,7 @@ class ShoppingCartController extends Controller
             $cart[$request->productId]['quantity'] = ($request->option == 'add')? ++$cart[$request->productId]['quantity']: --$cart[$request->productId]['quantity'];
             $cart[$request->productId]['amount'] = $cart[$request->productId]['amount_unit'] * $cart[$request->productId]['quantity'];
             session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Carrito actualizado exitosamente');
+            return back()->with('success', 'Carrito actualizado exitosamente');
         }
     }
 
@@ -74,7 +74,7 @@ class ShoppingCartController extends Controller
                 unset($cart[$request->productId]);
                 session()->put('cart', $cart);
             }
-            return redirect()->back()->with('success', 'Producto removido exitosamente');
+            return back()->with('success', 'Producto removido exitosamente');
         }
     }
 

@@ -24784,6 +24784,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _Jetstream_NavLink_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/NavLink.vue */ "./resources/js/Jetstream/NavLink.vue");
 /* harmony import */ var _Layouts_Template_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Layouts/Template.vue */ "./resources/js/Layouts/Template.vue");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -24801,9 +24807,27 @@ __webpack_require__.r(__webpack_exports__);
       return product.price - amount_discount;
     },
     addToCart: function addToCart(product) {
+      var _this = this;
       var amount_discount = this.twoDecimals(this.discount(product));
       this.$inertia.post(route('shoppingCart.add', product), {
         amount_discount: amount_discount
+      }, {
+        onSuccess: function onSuccess() {
+          if (!Object.values(_this.$page.props.messages).every(function (element) {
+            return element === null;
+          })) {
+            var to_toast = Object.entries(_this.$page.props.messages).find(function (_ref) {
+              var _ref2 = _slicedToArray(_ref, 2),
+                key = _ref2[0],
+                value = _ref2[1];
+              return value !== null;
+            });
+            _this.$toast.open({
+              message: to_toast[1],
+              type: to_toast[0]
+            });
+          }
+        }
       });
     }
   }
@@ -25275,6 +25299,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_Template_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Layouts/Template.vue */ "./resources/js/Layouts/Template.vue");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -25299,6 +25329,20 @@ __webpack_require__.r(__webpack_exports__);
       this.amount_delivery = this.calculateDelivery();
     }
     this.amount_total = this.calculateTotal();
+    if (!Object.values(this.$page.props.messages).every(function (element) {
+      return element === null;
+    })) {
+      var to_toast = Object.entries(this.$page.props.messages).find(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+          key = _ref2[0],
+          value = _ref2[1];
+        return value !== null;
+      });
+      this.$toast.open({
+        message: to_toast[1],
+        type: to_toast[0]
+      });
+    }
   },
   methods: {
     calculateTotalProducts: function calculateTotalProducts() {
@@ -25364,9 +25408,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   },
   props: ['myCart', 'shop'],
   mounted: function mounted() {
-    if (this.shop.delivery) {
-      this.amount_delivery = this.calculateDelivery();
-    }
+    this.calculateDelivery();
     this.amount_total = this.calculateTotal();
   },
   methods: {
@@ -25381,7 +25423,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       return total;
     },
     calculateDelivery: function calculateDelivery() {
-      return this.shop.delivery.percent / 100 * this.calculateTotalProducts(this.myCart);
+      if (this.shop.delivery) {
+        this.amount_delivery = this.shop.delivery.percent / 100 * this.calculateTotalProducts(this.myCart);
+      }
+      return this.amount_delivery;
     },
     calculateTotal: function calculateTotal() {
       return this.calculateTotalProducts() + this.amount_delivery;
@@ -25397,8 +25442,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         productId: productId
       }, {
         onSuccess: function onSuccess() {
-          var _this$calculateDelive;
-          _this.amount_delivery = (_this$calculateDelive = _this.calculateDelivery()) !== null && _this$calculateDelive !== void 0 ? _this$calculateDelive : 0;
+          if (!Object.values(_this.$page.props.messages).every(function (element) {
+            return element === null;
+          })) {
+            var to_toast = Object.entries(_this.$page.props.messages).find(function (_ref) {
+              var _ref2 = _slicedToArray(_ref, 2),
+                key = _ref2[0],
+                value = _ref2[1];
+              return value !== null;
+            });
+            _this.$toast.open({
+              message: to_toast[1],
+              type: to_toast[0]
+            });
+          }
+          _this.amount_delivery = _this.calculateDelivery();
           _this.amount_total = _this.calculateTotal();
         }
       });
@@ -25409,8 +25467,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         productId: productId
       }), {
         onSuccess: function onSuccess() {
-          var _this2$calculateDeliv;
-          _this2.amount_delivery = (_this2$calculateDeliv = _this2.calculateDelivery()) !== null && _this2$calculateDeliv !== void 0 ? _this2$calculateDeliv : 0;
+          if (!Object.values(_this2.$page.props.messages).every(function (element) {
+            return element === null;
+          })) {
+            var to_toast = Object.entries(_this2.$page.props.messages).find(function (_ref3) {
+              var _ref4 = _slicedToArray(_ref3, 2),
+                key = _ref4[0],
+                value = _ref4[1];
+              return value !== null;
+            });
+            _this2.$toast.open({
+              message: to_toast[1],
+              type: to_toast[0]
+            });
+          }
+          _this2.amount_delivery = _this2.calculateDelivery();
           _this2.amount_total = _this2.calculateTotal();
         }
       });
